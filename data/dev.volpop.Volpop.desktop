@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Volpop
+GenericName=Sound Settings
+Comment=Adjust volume, switch audio devices and per-application volume
+Exec=volpop --show
+Icon=audio-volume-high
+Terminal=false
+Categories=AudioVideo;Audio;Mixer;Settings;
+Keywords=volume;sound;audio;mixer;speaker;microphone;headphones;pulseaudio;pipewire;
+StartupNotify=false

@@ -1,0 +1,21 @@
+# volpop 配置示例：复制到 ~/.config/volpop/volpop.conf
+# 修改后执行 `volpop --quit && volpop --daemon` 生效（颜色和样式文件每次弹出时自动重新读取）
+
+[appearance]
+# 定义 @bg @surface @fg @subtle @muted @blue @red @green 的 GTK CSS 文件（@define-color）
+#colors = ~/.config/theme/current/waybar.css
+#style = ~/.config/volpop/style.css
+#width = 368
+
+[popup]
+# top-left | top | top-right | bottom-left | bottom | bottom-right | left | right | center
+#anchor = top-right
+#margin-top = 6
+#margin-right = 8
+#hide-on-focus-loss = true
+
+[audio]
+# 滑块上限，100–150；超过 100% 为软件放大，可能失真
+#max-volume = 100
+# 面板可见时显示电平表
+#peak-meters = true

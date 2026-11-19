@@ -1,0 +1,10 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* 默认调色板。配置文件 [appearance] colors 指向的文件会在此之后加载并覆盖这些颜色。 */
+@define-color bg      rgba(233, 234, 240, 0.92);
+@define-color surface #d0d5e3;
+@define-color fg      #3760bf;
+@define-color subtle  #6172b0;
+@define-color muted   #848cb5;
+@define-color blue    #2e7de9;
+@define-color green   #587539;
+@define-color red     #f52a65;

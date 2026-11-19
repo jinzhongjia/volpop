@@ -1,0 +1,187 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* volpop 样式（与 netpop 共用同一套外观）。颜色只使用调色板中的命名颜色，以便跟随主题。 */
+
+window.volpop, window.volpop-backdrop { background: transparent; }
+
+/* ── 面板外框 ──
+ * layer-shell：合成器不装饰，面板自己画圆角和描边。
+ * 普通窗口：合成器（Hyprland 等）已经画了边框和圆角，面板不再画，避免双重边框。 */
+.panel {
+  color: @fg;
+  padding: 12px 4px 12px 12px; /* 右侧只留 4px，另 8px 是滚动条槽，见 np_scroller() */
+}
+/* layer-shell 有合成器模糊（Hyprland layerrule blur），保留轻微透明 */
+window.layer .panel {
+  background-color: rgb(from @bg r g b / 0.97);
+  border-radius: 14px;
+  border: 1px solid alpha(@muted, 0.35);
+}
+/* 普通窗口没有模糊，透明只会让背后的文字透出来，用不透明背景 */
+window.toplevel .panel {
+  background-color: rgb(from @bg r g b / 1);
+  border-radius: 0;
+  border: none;
+}
+
+.volpop label { color: inherit; }
+.glyph { font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace; font-size: 17px; }
+
+.header { margin: 0 8px 6px 0; min-height: 32px; }
+.title { font-weight: 700; font-size: 16px; }
+.footer { margin: 8px 8px 0 0; }
+.section { color: @muted; font-size: 12px; font-weight: 600; margin: 14px 8px 6px 8px; }
+.hint { color: @muted; font-size: 12px; }
+.key { color: @muted; font-size: 12.5px; }
+.val { font-size: 12.5px; font-family: "JetBrainsMono Nerd Font", monospace; }
+.error { color: @red; }
+.placeholder { color: @muted; padding: 28px 0; }
+.placeholder-small { color: @muted; font-size: 12px; padding: 6px 10px; }
+
+.card { background-color: alpha(@fg, 0.05); border-radius: 12px; padding: 12px; }
+.card + .card { margin-top: 8px; }
+
+/* ── 列表 ── */
+list { background: transparent; }
+list row {
+  border-radius: 10px;
+  padding: 7px 8px 7px 10px;
+  margin: 1px 0;
+  background: transparent;
+  outline: none;
+  transition: background-color 120ms ease;
+}
+list row:hover { background-color: alpha(@fg, 0.07); }
+list row:focus-visible { background-color: alpha(@blue, 0.14); }
+list row.active { background-color: alpha(@blue, 0.13); }
+list row.active .name, list row.active .sig { color: @blue; font-weight: 700; }
+list row .sig { color: @subtle; min-width: 22px; }
+list row .lock { color: @muted; font-size: 13px; }
+list row .chev { color: @muted; font-size: 14px; }
+.name { font-size: 14px; }
+.sub { color: @muted; font-size: 12px; }
+
+/* ── 按钮 ── */
+button {
+  background: alpha(@fg, 0.07); background-image: none; border: none; box-shadow: none;
+  color: @fg; border-radius: 10px; padding: 6px 14px; min-height: 20px; outline: none;
+}
+button:hover { background: alpha(@fg, 0.13); }
+button:focus-visible { box-shadow: 0 0 0 2px alpha(@blue, 0.6); }
+button:disabled { opacity: 0.5; }
+button.icon { background: transparent; padding: 0; min-width: 30px; min-height: 30px; color: @subtle; }
+button.icon:hover { background: alpha(@fg, 0.09); }
+button.flat { background: transparent; color: @subtle; padding: 6px 10px; }
+button.flat:hover { background: alpha(@fg, 0.08); }
+button.suggested { background: @blue; color: #ffffff; font-weight: 600; }
+button.suggested:hover { background: shade(@blue, 1.08); }
+button.destructive { color: @red; background: alpha(@red, 0.10); }
+button.destructive:hover { background: alpha(@red, 0.18); }
+
+/* ── 输入 ── */
+entry, spinbutton, textview.textarea, dropdown > button {
+  background: alpha(@fg, 0.06); background-image: none; color: @fg;
+  border: 1px solid alpha(@muted, 0.35); border-radius: 9px; box-shadow: none; outline: none;
+}
+entry, spinbutton { min-height: 34px; padding: 0 10px; caret-color: @blue; }
+entry:focus-within, spinbutton:focus-within, textview.textarea:focus-within { border-color: @blue; }
+entry > text > placeholder { color: alpha(@muted, 0.85); }
+entry image { color: @muted; }
+spinbutton > text { background: transparent; }
+spinbutton > button { background: transparent; border: none; border-radius: 0; padding: 0 8px; min-height: 0; }
+textview.textarea { padding: 8px 10px; font-family: "JetBrainsMono Nerd Font", monospace; font-size: 12.5px; }
+textview.textarea > text { background: transparent; color: @fg; }
+dropdown > button { padding: 6px 10px; min-height: 20px; }
+dropdown > button:hover { background: alpha(@fg, 0.10); }
+popover > contents { background: @surface; color: @fg; border-radius: 10px; padding: 4px; border: 1px solid alpha(@muted, 0.3); box-shadow: none; }
+popover listview, popover scrolledwindow, popover viewport { background: transparent; }
+popover listview row { border-radius: 7px; padding: 6px 10px; }
+popover listview row:hover, popover listview row:selected { background: alpha(@blue, 0.15); color: @fg; }
+
+/* ── 开关 ── */
+switch {
+  background: alpha(@muted, 0.40); background-image: none; border: none; border-radius: 999px;
+  box-shadow: none; min-width: 40px; min-height: 22px; padding: 0; outline: none;
+}
+switch:checked { background: @blue; }
+switch slider {
+  background: #ffffff; background-image: none; border: none; box-shadow: 0 1px 2px alpha(black, 0.2);
+  border-radius: 999px; min-width: 18px; min-height: 18px; margin: 2px; padding: 0;
+}
+switch image { opacity: 0; }
+
+/* ── 折叠分区（GtkExpander 的节点是 expander-widget > box > title > expander + label） ── */
+expander-widget.section-expander { margin-top: 14px; }
+expander-widget.section-expander > box > title {
+  color: @muted; font-size: 12px; font-weight: 600; padding: 2px 8px 6px 8px; border-radius: 6px;
+}
+expander-widget.section-expander > box > title:hover { color: @fg; }
+expander-widget.section-expander > box > title > expander {
+  color: @muted; min-width: 12px; min-height: 12px; -gtk-icon-size: 12px; margin-right: 4px;
+}
+
+/* ── 滚动条：重置主题样式，细条悬浮在右侧 8px 留白槽里 ── */
+scrollbar, scrollbar trough, scrollbar range {
+  background: transparent; background-image: none; border: none; box-shadow: none; outline: none; padding: 0; margin: 0;
+}
+scrollbar slider {
+  background: alpha(@muted, 0.45); background-image: none; border: none; box-shadow: none;
+  border-radius: 999px; min-width: 3px; min-height: 28px; margin: 0 1px; transition: all 150ms ease;
+}
+scrollbar.hovering slider, scrollbar slider:hover { min-width: 6px; background: alpha(@muted, 0.7); }
+scrollbar slider:active { background: @blue; }
+scrollbar button { min-width: 0; min-height: 0; padding: 0; border: none; background: none; }
+undershoot, overshoot { background: none; }
+
+/* ── 其他 ── */
+.toast {
+  background-color: rgb(from @fg r g b / 0.94); color: @surface; border-radius: 10px;
+  padding: 8px 14px; margin: 0 16px 14px 16px; font-size: 13px;
+}
+spinner { color: @blue; }
+tooltip { background: @surface; color: @fg; border-radius: 8px; }
+
+/* ── 音量面板特有 ── */
+.card { padding: 10px 12px; }
+.card + .card { margin-top: 0; }
+.kind { color: @subtle; font-size: 18px; min-width: 22px; }
+.pct { color: @subtle; font-size: 12.5px; font-family: "JetBrainsMono Nerd Font", monospace; min-width: 38px; }
+.volume.muted .pct, .volume.muted .mute { color: @red; }
+.volume.muted scale highlight { background: alpha(@muted, 0.6); }
+button.mute { min-width: 30px; }
+button.small { padding: 3px 10px; font-size: 12px; min-height: 0; }
+.badge { color: @blue; font-size: 11.5px; font-weight: 600; }
+.card.current { box-shadow: inset 0 0 0 1px alpha(@blue, 0.35); }
+.card.app.paused { opacity: 0.6; }
+.app-glyph { color: @subtle; font-size: 18px; min-width: 22px; }
+.app-icon { min-width: 22px; }
+
+/* 滑块 */
+scale { padding: 6px 0; min-height: 0; }
+scale trough { background: alpha(@muted, 0.30); border: none; border-radius: 999px; min-height: 6px; box-shadow: none; }
+scale highlight { background: @blue; border-radius: 999px; border: none; margin: 0; padding: 0; min-height: 6px; }
+scale trough { margin: 0; padding: 0; }
+levelbar.peak block { margin: 0; padding: 0; }
+scale slider {
+  background: #ffffff; background-image: none; border: none; border-radius: 999px;
+  min-width: 16px; min-height: 16px; margin: -6px; box-shadow: 0 1px 3px alpha(black, 0.25);
+  transition: transform 100ms ease;
+}
+scale slider:hover { box-shadow: 0 0 0 4px alpha(@blue, 0.18), 0 1px 3px alpha(black, 0.25); }
+scale marks indicator { background: alpha(@muted, 0.7); min-width: 1px; min-height: 5px; }
+
+/* 电平表 */
+levelbar.peak { margin: 0 44px 0 36px; }
+levelbar.peak trough { background: alpha(@muted, 0.18); border: none; border-radius: 999px; min-height: 3px; padding: 0; }
+levelbar.peak block.filled { background: @green; border-radius: 999px; border: none; min-height: 3px; }
+levelbar.peak block.empty { background: transparent; border: none; }
+
+/* 标签页 */
+.segmented button { border-radius: 0; padding: 5px 0; }
+.segmented button:first-child { border-radius: 9px 0 0 9px; }
+.segmented button:last-child { border-radius: 0 9px 9px 0; }
+.segmented button:checked { background: @blue; color: #ffffff; }
+
+/* “输出到…”菜单 */
+list.menu { background: transparent; }
+list.menu row { padding: 6px 10px; border-radius: 7px; }
+list.menu row:hover { background: alpha(@blue, 0.15); }

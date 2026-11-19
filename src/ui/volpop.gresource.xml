@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/dev/volpop/Volpop">
+    <file>palette.css</file>
+    <file>style.css</file>
+  </gresource>
+</gresources>
