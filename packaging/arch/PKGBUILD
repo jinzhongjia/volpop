@@ -1,0 +1,28 @@
+# Maintainer: jinzhongjia
+pkgname=volpop
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="GTK4 volume popup and mixer for PulseAudio / PipeWire (replaces pavucontrol)"
+arch=('x86_64' 'aarch64')
+url="https://github.com/jinzhongjia/volpop"
+license=('GPL-3.0-or-later')
+depends=('gtk4' 'libpulse' 'glib2' 'gtk4-layer-shell')
+makedepends=('meson' 'ninja')
+checkdepends=('desktop-file-utils')
+optdepends=('pipewire-pulse: when running PipeWire instead of PulseAudio'
+            'ttf-jetbrains-mono-nerd: icons')
+source=("$url/releases/download/v$pkgver/$pkgname-$pkgver.tar.xz")
+sha256sums=('SKIP')
+
+build() {
+  arch-meson "$pkgname-$pkgver" build -Dlayer_shell=enabled
+  meson compile -C build
+}
+
+check() {
+  meson test -C build --print-errorlogs
+}
+
+package() {
+  meson install -C build --destdir "$pkgdir"
+}

@@ -1,0 +1,52 @@
+name: 问题报告
+description: volpop 出现了错误或不符合预期的行为
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 发生了什么
+      description: 你看到了什么，以及你原本期望看到什么
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开面板
+        2. 点击……
+        3. ……
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: volpop 版本
+      description: "`volpop --version` 的输出"
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: 环境
+      description: 发行版、合成器（Hyprland / Sway / …）、GTK 版本、音频服务（PipeWire / PulseAudio）版本
+      placeholder: Arch Linux, Hyprland 0.50, GTK 4.24, PipeWire 1.6
+    validations:
+      required: true
+  - type: dropdown
+    id: layer
+    attributes:
+      label: 显示模式
+      options:
+        - layer-shell（装了 gtk4-layer-shell）
+        - 普通窗口
+        - 不确定
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志
+      description: |
+        可以用 `volpop --quit; G_MESSAGES_DEBUG=volpop volpop --daemon` 启动后复现，并附上输出。
+        
+      render: text
