@@ -1,0 +1,4 @@
+option('ui', type: 'feature', value: 'auto',
+       description: 'Build the GTK4 application (disable to build and test only the core library)')
+option('layer_shell', type: 'feature', value: 'auto',
+       description: 'Show the popup as a wlr-layer-shell surface (needs gtk4-layer-shell)')
