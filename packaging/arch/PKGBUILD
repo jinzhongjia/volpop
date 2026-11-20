@@ -12,7 +12,7 @@ checkdepends=('desktop-file-utils')
 optdepends=('pipewire-pulse: when running PipeWire instead of PulseAudio'
             'ttf-jetbrains-mono-nerd: icons')
 source=("$url/releases/download/v$pkgver/$pkgname-$pkgver.tar.xz")
-sha256sums=('SKIP')
+sha256sums=('71c4cc61904d01fac7796d2fc016af2278cc154c08d99aebe4319c0907563d3f')
 
 build() {
   arch-meson "$pkgname-$pkgver" build -Dlayer_shell=enabled
