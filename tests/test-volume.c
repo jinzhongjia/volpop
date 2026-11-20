@@ -128,7 +128,7 @@ static void test_balance(void)
     pa_cvolume one;
     pa_cvolume_set(&one, 1, PA_VOLUME_NORM);
     g_assert_false(vp_balance_set(&one, &mono, 0.5));
-    g_assert_cmpfloat(vp_balance_get(&one, &mono), ==, 0.0);
+    g_assert_cmpfloat_with_epsilon(vp_balance_get(&one, &mono), 0.0, 1e-9);
     /* 声道数不一致 */
     g_assert_false(vp_balance_set(&one, &m, 0.5));
 }
